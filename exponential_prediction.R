@@ -17,15 +17,17 @@ gr2 <- exponential.model$coefficients[2]
 
 time <- c(1:24)
 case <- exp(gr2*time)
-plot(time, case, type="l", las=1, xlab = "Disease start time (day)", ylab = "Total confirmed cases", col="blue")
+par(oma=c(0,2,3,0))
+plot(time, case, type="l", las=1, lwd=2, xlab = "Time after disease start transmission (day)", ylab = "", col="blue")
 case <- exp(gr2*1.1*time)
 lines(time, case, type="l", las=1, col="blue", lty=2)
 case <- exp(gr2*0.9*time)
 lines(time, case, type="l", las=1, col="blue", lty=2)
-abline(h=10000, lty=3)
-abline(h=1000, lty=3)
+abline(h=10000, lty=3, col="grey20")
+abline(h=1000, lty=3, col="grey20")
 
 axis(3, 1:10, date)
 lines(timevalues, Counts.exponential2, lwd=2, col = "red")
 points(data$time, data$case, pch=16, las=1)
-
+mtext("2019-nCoV data fitting and prediction", side=3, line=0, cex=2, outer=TRUE) 
+mtext("Total confirmed cases", side=2, line=0, outer=TRUE) 
