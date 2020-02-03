@@ -55,12 +55,12 @@ input <- "SEIR.MTC.in.R"
 #makemcsim(model)
 df <- mcsim(model, input)
 
-
+str <- 5
 t<-seq(0,100)
-ylim <- range(df[,5:ncol(df)])
+ylim <- range(df[,str:ncol(df)])
 
 for(i in 1:500){
-  max.d <- which(df[i,5:ncol(df)]==max(df[i,5:ncol(df)]))
+  max.d <- which(df[i,str:ncol(df)]==max(df[i,str:ncol(df)]))
   if(i == 1) max.ds <- max.d else max.ds <- c(max.ds, max.d)
 }
 
@@ -68,11 +68,24 @@ layout(matrix(c(1,2,2)), heights=c(1,2))
 par(mar=c(0,4,0,0))
 hist(max.ds, axes = F, main="", ylab="")
 par(mar=c(4,4,0,0))
-plot(t, df[1,5:ncol(df)], type="l", 
+plot(t, df[1,str:ncol(df)], type="l", 
      ylim=ylim, 
      col=scales::alpha(rgb(0,0,0), 0.2))
 for(i in 2:500){
-  lines(t, df[i,5:ncol(df)], col=scales::alpha(rgb(0,0,0), 0.2))
+  lines(t, df[i,str:ncol(df)], col=scales::alpha(rgb(0,0,0), 0.2))
 }
 
+
+dev.off()
+par(mar=c(4,4,0,0))
+plot(t, df[1,str:ncol(df)], type="l", 
+     ylim=ylim, 
+     #log="y",
+     col=scales::alpha(rgb(0,0,0), 0.2))
+for(i in 2:500){
+  lines(t, df[i,str:ncol(df)], col=scales::alpha(rgb(0,0,0), 0.2))
+}
+
+y <- exp(0.3*t)
+lines(t, y, col="red")
 
