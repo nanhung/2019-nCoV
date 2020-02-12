@@ -2,6 +2,7 @@ States ={
   S,
   E,
   I,
+  Cum_I,
   J,
   R
 };
@@ -23,6 +24,7 @@ Initialize{
   S = Initial_S;
   E = Initial_E;
   I = Initial_I;
+  Cum_I = Initial_I;
   J = Initial_J;
   R = Initial_R;
   
@@ -37,6 +39,9 @@ Dynamics {
   dt(I)=sigma*E-alpha*I;
   dt(J)=alpha*I-(gama+mu)*J;
   dt(R)=gama*J;
+  
+  dt(Cum_I)=sigma*E;
+  
 };
 
 End.
